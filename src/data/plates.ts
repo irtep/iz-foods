@@ -24,7 +24,7 @@ export const ingredients: Ingredient[] = [
     { id: 4, name: 'riisiä', type: 'g' },
     { id: 5, name: 'kevätsipuli', type: 'pussi/a' },
     { id: 6, name: 'inkivääri', type: 'kpl' },
-    { id: 7, name: 'soija kastike', type: 'pullo/a' },
+    { id: 7, name: 'soijakastike', type: 'pullo/a' },
     { id: 8, name: 'possua', type: 'g' }
 ];
 

@@ -1,18 +1,22 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { ApiData, CredentialsTypes, FetchSettings, UserPswChangeData } from '../sharedInterfaces/sharedInterfaces';
+import { ApiData, CredentialsTypes, FetchSettings, UserPswChangeData } from '../sharedInterfaces/sharedInterfaces.ts';
 import useIsMobile from '../customHooks/useIsMobile';
+import { Ingredient } from '../data/plates.ts';
+import { NonFood } from '../data/non-foods.ts';
 
-export const izFoodsContext: React.Context<any> = createContext(undefined);
+export const IzFoodsContext: React.Context<any> = createContext(undefined);
 
 interface Props {
   children: React.ReactNode;
 }
 
-export const izFoodsProvider: React.FC<Props> = (props: Props): React.ReactElement => {
+export const IzFoodsProvider: React.FC<Props> = (props: Props): React.ReactElement => {
   const [token, setToken] = useState<string>(String(''));
   const [username, setUsername] = useState<string>(String(''));
-  const [dialogOpen, setDialogOpen] = useState<boolean>(false);
+  const [loginDialogOpen, setLoginDialogOpen] = useState<boolean>(false);
+  const [registerDialogOpen, setRegisterDialogOpen] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
+  const [selectedToList, setSelectedToList] = useState<Ingredient[] | NonFood[]>([]);
   const [apiData, setApiData] = useState<ApiData>({
     allCredentials: [],
     error: "",
@@ -171,18 +175,21 @@ export const izFoodsProvider: React.FC<Props> = (props: Props): React.ReactEleme
   }, [username]);
 
   return (
-    <izFoodsContext.Provider value={{
+    <IzFoodsContext.Provider value={{
       token, setToken,
       username, setUsername,
-      dialogOpen, setDialogOpen,
+      loginDialogOpen, setLoginDialogOpen,
+      registerDialogOpen, setRegisterDialogOpen,
       message, setMessage,
       apiData, setApiData,
       apiCall,
       modeOfUse,
       logUserOut,
-      isMobile
+      isMobile,
+      selectedToList,
+      setSelectedToList
     }}>
       {props.children}
-    </izFoodsContext.Provider>
+    </IzFoodsContext.Provider>
   );
 }

@@ -1,12 +1,16 @@
 import { Alert, Container, Typography } from '@mui/material';
 import React, { useContext } from 'react';
-import { izFoodsContext } from '../context/izFoodsContext';
+import { IzFoodsContext } from '../context/izFoodsContext';
 import NavButtons from './NavButtons';
+import Login from './Login';
+import Register from './Register';
 
 const Header: React.FC = (): React.ReactElement => {
     const {
-        message
-    } = useContext(izFoodsContext);
+        message,
+        loginDialogOpen,
+        registerDialogOpen
+    } = useContext(IzFoodsContext);
 
     return (
         <Container sx={{
@@ -21,7 +25,7 @@ const Header: React.FC = (): React.ReactElement => {
             <Typography variant="h4">
                 iz
                 <span style={{ color: "lightGreen" }}>
-                    4
+                    Foods
                 </span>
             </Typography>
 
@@ -30,10 +34,22 @@ const Header: React.FC = (): React.ReactElement => {
             <Container>
                 { // if message, show it here:
                     (message !== '')
-                    ? <Alert severity="error">{message}</Alert>
-                    : <></>
+                        ? <Alert severity="error">{message}</Alert>
+                        : <></>
                 }
             </Container>
+
+            {
+                loginDialogOpen
+                    ? <Login />
+                    : <></>
+            }
+    
+            {
+                registerDialogOpen
+                    ? <Register />
+                    : <></>
+            }
         </Container>
     );
 }

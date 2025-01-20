@@ -1,10 +1,10 @@
-export interface NonFoods {
+export interface NonFood {
     id: number;
     name: string;
     type: string;
 };
 
-export const nonFoods: NonFoods[] = [
+export const nonFoods: NonFood[] = [
     {
         id: 0,
         name: 'Koiran ruoka',

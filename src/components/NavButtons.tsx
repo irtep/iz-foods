@@ -1,14 +1,15 @@
 import { Button, Container, Typography } from '@mui/material';
 import React, { useContext } from 'react';
-import { izFoodsContext } from '../context/izFoodsContext';
+import { IzFoodsContext } from '../context/izFoodsContext';
 
 const NavButtons: React.FC = (): React.ReactElement => {
 
     const {
         username,
         logUserOut,
-        setDialogOpen
-    } = useContext(izFoodsContext);
+        setLoginDialogOpen,
+        setRegisterDialogOpen
+    } = useContext(IzFoodsContext);
 
     return (
         <Container
@@ -28,7 +29,7 @@ const NavButtons: React.FC = (): React.ReactElement => {
                             border: "1px solid white"
                         }}
                         onClick={() => {
-                            navigate('/login');
+                           setLoginDialogOpen(true);
                         }}>
                         Kirjaudu sisään
                     </Button>
@@ -38,7 +39,7 @@ const NavButtons: React.FC = (): React.ReactElement => {
                             color: "white"
                         }}
                         onClick={() => {
-                            navigate('/register');
+                           setRegisterDialogOpen(true);
                         }}>
                         Rekisteröidy
                     </Button>
@@ -69,9 +70,9 @@ const NavButtons: React.FC = (): React.ReactElement => {
                             color: "white",
                             border: "1px solid white"
                         }}
-                        onClick={() => { setDialogOpen(true) }}
+                        onClick={() => {  }}
                     >
-                        Tallenna uudet tunnisteet
+                        Tallenna ostoskori
                     </Button>
 
                     <Button
@@ -81,7 +82,9 @@ const NavButtons: React.FC = (): React.ReactElement => {
                             color: "white",
                             border: "1px solid white"
                         }}
-                        onClick={() => { navigate("/settings") }}
+                        onClick={() => { 
+                           // navigate("/settings") 
+                        }}
                         color="secondary">
                         Omat asetukset
                     </Button>
