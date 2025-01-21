@@ -1,8 +1,9 @@
 import { Container } from '@mui/material';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { IngredientWithQuantity, menus, Plate, ingredients, Ingredient } from '../data/plates';
 import { IzFoodsContext } from '../context/izFoodsContext';
-import { NonFood } from '../data/non-foods';
+//import { NonFood } from '../data/non-foods';
+import { IngredientAtBasket } from '../sharedInterfaces/sharedInterfaces';
 
 const Foods: React.FC = (): React.ReactElement => {
 
@@ -22,22 +23,44 @@ const Foods: React.FC = (): React.ReactElement => {
                     return (
                         <Container
                             sx={{
-                                margin: 1
+                                margin: 1,
                             }}
                             key={`${m.name} ${i}`}
                             onClick={() => {
-                                setSelectedToList((prevSelectedToList: Ingredient[] | NonFood[]) => {
-                                    const newIngredients = m.ingredients
-                                        .map((ing: IngredientWithQuantity) => ingredients[ing.id]) // Map to ingredient objects
-                                        .filter((ingredient) => !prevSelectedToList.includes(ingredient)); // Filter out existing ones
+                                setSelectedToList((prevSelectedToList: IngredientAtBasket[]) => {
+                                    const updatedList: IngredientAtBasket[] = [...prevSelectedToList];
 
-                                    return [...prevSelectedToList, ...newIngredients];
+                                    m.ingredients.forEach((ing: IngredientWithQuantity) => {
+                                        const ingredientDetails = ingredients.find(
+                                            (e: Ingredient) => e.id === ing.id
+                                        ); // Find the ingredient details based on ID
+
+                                        if (ingredientDetails) {
+                                            const existingIngredientIndex = updatedList.findIndex(
+                                                (ingredient) => ingredient.name === ingredientDetails.name
+                                            );
+
+                                            if (existingIngredientIndex > -1) {
+                                                // If ingredient exists, update the quantity
+                                                updatedList[existingIngredientIndex].quantity += ing.quantity;
+                                            } else {
+                                                // Add new ingredient
+                                                updatedList.push({
+                                                    name: ingredientDetails.name,
+                                                    quantity: ing.quantity,
+                                                    type: ingredientDetails.type,
+                                                });
+                                            }
+                                        }
+                                    });
+
+                                    return updatedList;
                                 });
                             }}
                         >
                             {m.name}
                         </Container>
-                    )
+                    );
                 })
             }
         </Container>
