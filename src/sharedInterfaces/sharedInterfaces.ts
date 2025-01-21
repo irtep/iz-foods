@@ -27,3 +27,9 @@ export interface FetchSettings {
     oldPassword: string
     newPassword: string
   }
+
+  export interface IngredientAtBasket {
+    name: string;
+    quantity: number;
+    type: string;
+  }

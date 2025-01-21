@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { ApiData, CredentialsTypes, FetchSettings, UserPswChangeData } from '../sharedInterfaces/sharedInterfaces.ts';
+import { ApiData, CredentialsTypes, FetchSettings, IngredientAtBasket, UserPswChangeData } from '../sharedInterfaces/sharedInterfaces.ts';
 import useIsMobile from '../customHooks/useIsMobile';
 import { Ingredient } from '../data/plates.ts';
 import { NonFood } from '../data/non-foods.ts';
@@ -16,7 +16,8 @@ export const IzFoodsProvider: React.FC<Props> = (props: Props): React.ReactEleme
   const [loginDialogOpen, setLoginDialogOpen] = useState<boolean>(false);
   const [registerDialogOpen, setRegisterDialogOpen] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
-  const [selectedToList, setSelectedToList] = useState<Ingredient[] | NonFood[]>([]);
+  //const [selectedToList, setSelectedToList] = useState<Ingredient[] | NonFood[]>([]);
+  const [selectedToList, setSelectedToList] = useState<IngredientAtBasket[]>([])
   const [apiData, setApiData] = useState<ApiData>({
     allCredentials: [],
     error: "",
