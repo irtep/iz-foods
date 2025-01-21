@@ -1,2 +1,5 @@
 # iz-foods
-Work in process
+
+helper to make a food list
+
+... work in process
