@@ -1,14 +1,19 @@
-import { Button, Container, Typography } from '@mui/material';
+import { Button, Container, Switch, Typography } from '@mui/material';
 import React, { useContext } from 'react';
 import { IzFoodsContext } from '../context/izFoodsContext';
 
 const NavButtons: React.FC = (): React.ReactElement => {
 
     const {
-        username,
-        logUserOut,
-        setLoginDialogOpen,
-        setRegisterDialogOpen
+        isMobile,
+        showFoods,
+        setShowFoods,
+        showIngredients,
+        setShowIngredients,
+        showList,
+        setShowList,
+        saveShoppingList,
+        emptyList
     } = useContext(IzFoodsContext);
 
     return (
@@ -17,79 +22,78 @@ const NavButtons: React.FC = (): React.ReactElement => {
                 margin: 2
             }}
         >
-            {/* Buttons, while not logged in: */}
-
-            {(username === '')
-                ? <>
-                    <Button
-                        sx={{
-                            margin: 1,
-                            background: "rgb(0,0,80)",
-                            color: "white",
-                            border: "1px solid white"
-                        }}
-                        onClick={() => {
-                           setLoginDialogOpen(true);
-                        }}>
-                        Kirjaudu sisään
-                    </Button>
-                    <Button
-                        sx={{
-                            background: "darkgreen",
-                            color: "white"
-                        }}
-                        onClick={() => {
-                           setRegisterDialogOpen(true);
-                        }}>
-                        Rekisteröidy
-                    </Button>
-                </>
-                : <>
-
-                {/* Buttons, while logged in */}
-                    <Typography>{`Kirjautunut: ${username} `}</Typography>
-
-                    <Button
-                        sx={{
-                            margin: 1,
-                            background: "rgb(0,0,80)",
-                            color: "white",
-                            border: "1px solid white"
-                        }}
-                        size="small"
-                        onClick={() => {
-                            logUserOut()
-                        }}>
-                        Kirjaudu ulos
-                    </Button>
-
-                    <Button
-                        sx={{
-                            margin: 1,
-                            background: "rgb(0,0,80)",
-                            color: "white",
-                            border: "1px solid white"
-                        }}
-                        onClick={() => {  }}
-                    >
-                        Tallenna ostoskori
-                    </Button>
-
-                    <Button
-                        sx={{
-                            margin: 1,
-                            background: "rgb(0,0,80)",
-                            color: "white",
-                            border: "1px solid white"
-                        }}
-                        onClick={() => { 
-                           // navigate("/settings") 
-                        }}
-                        color="secondary">
-                        Omat asetukset
-                    </Button>
-                </>
+            {
+                (isMobile)
+                    ? <>
+                        <Typography
+                            sx={{
+                                color: 'white'
+                            }}
+                        >
+                            Ruuat
+                            <Switch
+                                checked={showFoods}
+                                onChange={(e) => {
+                                    setShowFoods(e.target.checked);
+                                }}
+                                inputProps={{ 'aria-label': 'controlled' }}
+                            />
+                        </Typography>
+                        <Typography
+                            sx={{
+                                color: 'white'
+                            }}
+                        >
+                            Ainekset
+                            <Switch
+                                checked={showIngredients}
+                                onChange={(e) => {
+                                    setShowIngredients(e.target.checked);
+                                }}
+                                inputProps={{ 'aria-label': 'controlled' }}
+                            />
+                        </Typography>
+                        <Typography
+                            sx={{
+                                color: 'white'
+                            }}
+                        >
+                            Ostoslista
+                            <Switch
+                                checked={showList}
+                                onChange={(e) => {
+                                    setShowList(e.target.checked);
+                                }}
+                                inputProps={{ 'aria-label': 'controlled' }}
+                            />
+                        </Typography>
+                    </>
+                    : <></>
             }
+            <Button
+                sx={{
+                    background: 'green',
+                    color: 'white',
+                    margin: 1
+                }}
+                onClick={ () => {
+                    saveShoppingList();
+                }}
+            >
+                Tallenna
+            </Button>
+            <Button
+                sx={{
+                    background: 'darkRed',
+                    color: 'white',
+                    margin: 1
+                }}
+                onClick={ () => {
+                    emptyList();
+                }}
+            >
+                Tyhjennä
+            </Button>
         </Container>
     );
 }

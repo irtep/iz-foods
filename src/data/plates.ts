@@ -26,7 +26,9 @@ export const ingredients: Ingredient[] = [
     { id: 5, name: 'kevätsipuli', type: 'pussi/a', defaultQuantity: 1 },
     { id: 6, name: 'inkivääri', type: 'kpl', defaultQuantity: 1 },
     { id: 7, name: 'soijakastike', type: 'pullo/a', defaultQuantity: 1 },
-    { id: 8, name: 'possua', type: 'g', defaultQuantity: 100 }
+    { id: 8, name: 'possua', type: 'g', defaultQuantity: 100 },
+    { id: 9, name: 'kurkku', type: 'kpl', defaultQuantity: 1 },
+    { id: 10, name: 'appelsiinejä', type: 'kg', defaultQuantity: 1 }
 ];
 
 export const menus: Plate[] = [

@@ -1,9 +1,8 @@
-import { Container } from '@mui/material';
+import { Checkbox, Container, IconButton } from '@mui/material';
 import React, { useContext } from 'react';
 import { IzFoodsContext } from '../context/izFoodsContext';
-import { Ingredient } from '../data/plates';
-import { NonFood } from '../data/non-foods';
 import { IngredientAtBasket } from '../sharedInterfaces/sharedInterfaces';
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const ShoppingBasket: React.FC = (): React.ReactElement => {
 
@@ -22,13 +21,19 @@ const ShoppingBasket: React.FC = (): React.ReactElement => {
                                 margin: 1
                             }}
                             key={`atBasket:${elem.name}${i}`}
-                            onClick={() => {
-                                setSelectedToList((prevSelectedToList: IngredientAtBasket[]) =>
-                                    prevSelectedToList.filter((item) => item.name !== elem.name)
-                                );
-                            }}
                         >
                             {elem.name} {elem.quantity} {elem.type}
+                            <IconButton
+                                onClick={
+                                    () => {
+                                        setSelectedToList((prevSelectedToList: IngredientAtBasket[]) =>
+                                            prevSelectedToList.filter((item) => item.name !== elem.name)
+                                        );
+                                    }
+                                } color="error">
+                                <DeleteIcon />
+                            </IconButton>
+                            <Checkbox></Checkbox>
                         </Container>
                     )
                 })

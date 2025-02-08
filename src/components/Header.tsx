@@ -2,14 +2,17 @@ import { Alert, Container, Typography } from '@mui/material';
 import React, { useContext } from 'react';
 import { IzFoodsContext } from '../context/izFoodsContext';
 import NavButtons from './NavButtons';
+/*
 import Login from './Login';
 import Register from './Register';
-
+*/
 const Header: React.FC = (): React.ReactElement => {
     const {
         message,
+        /*
         loginDialogOpen,
         registerDialogOpen
+        */
     } = useContext(IzFoodsContext);
 
     return (
@@ -39,17 +42,6 @@ const Header: React.FC = (): React.ReactElement => {
                 }
             </Container>
 
-            {
-                loginDialogOpen
-                    ? <Login />
-                    : <></>
-            }
-    
-            {
-                registerDialogOpen
-                    ? <Register />
-                    : <></>
-            }
         </Container>
     );
 }

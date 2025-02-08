@@ -1,5 +1,5 @@
 import { Container } from '@mui/material';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { IngredientWithQuantity, menus, Plate, ingredients, Ingredient } from '../data/plates';
 import { IzFoodsContext } from '../context/izFoodsContext';
 //import { NonFood } from '../data/non-foods';
@@ -8,14 +8,9 @@ import { IngredientAtBasket } from '../sharedInterfaces/sharedInterfaces';
 const Foods: React.FC = (): React.ReactElement => {
 
     const {
-//        selectedToList,
         setSelectedToList
     } = useContext(IzFoodsContext);
-/*
-    useEffect(() => {
-        console.log('fullList: ', selectedToList);
-    });
-*/
+
     return (
         <Container>
             {
