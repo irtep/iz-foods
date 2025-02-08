@@ -1,9 +1,10 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { ApiData, CredentialsTypes, FetchSettings, IngredientAtBasket, UserPswChangeData } from '../sharedInterfaces/sharedInterfaces.ts';
+import { IngredientAtBasket } from '../sharedInterfaces/sharedInterfaces.ts';
 import useIsMobile from '../customHooks/useIsMobile';
+/*
 import { Ingredient } from '../data/plates.ts';
 import { NonFood } from '../data/non-foods.ts';
-
+*/
 export const IzFoodsContext: React.Context<any> = createContext(undefined);
 
 interface Props {
@@ -11,184 +12,57 @@ interface Props {
 }
 
 export const IzFoodsProvider: React.FC<Props> = (props: Props): React.ReactElement => {
-  const [token, setToken] = useState<string>(String(''));
-  const [username, setUsername] = useState<string>(String(''));
-  const [loginDialogOpen, setLoginDialogOpen] = useState<boolean>(false);
-  const [registerDialogOpen, setRegisterDialogOpen] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
   //const [selectedToList, setSelectedToList] = useState<Ingredient[] | NonFood[]>([]);
-  const [selectedToList, setSelectedToList] = useState<IngredientAtBasket[]>([])
-  const [apiData, setApiData] = useState<ApiData>({
-    allCredentials: [],
-    error: "",
-    fetchReady: true
-  });
+  const [selectedToList, setSelectedToList] = useState<IngredientAtBasket[]>([]);
+  const [showFoods, setShowFoods] = useState<boolean>(true);
+  const [showIngredients, setShowIngredients] = useState<boolean>(true);
+  const [showList, setShowList] = useState<boolean>(true);
   const isMobile: boolean = useIsMobile();
-  // Change this to match 'prod' or 'dev' depending, what you need
-  const modeOfUse: String = 'dev';
 
-  const apiCall = async (
-    method?: string,
-    credentials?: CredentialsTypes | UserPswChangeData,
-    importToken?: string,
-    id?: string,
-    isUsersPasswordChange?: boolean): Promise<void> => {
-
-    setApiData({
-      ...apiData,
-      fetchReady: false,
-      error: ""
-    });
-
-    let prodUrl: string = `/api/credentials`;
-    let devUrl: string = `http://localhost:5509/api/credentials`;
-    let authToken: string = token;
-
-    // if it is PUT or DELETE, url needs the id:
-    if (method === "PUT" || method === "DELETE") {
-      prodUrl = `/api/credentials/${id}`;
-      devUrl = `http://localhost:5509/api/credentials/${id}`;
-    }
-
-    if (isUsersPasswordChange) {
-      prodUrl = '/api/users';
-      devUrl = 'http://localhost:5509/api/users';
-    }
-
-    // in some cases token statevariable is empty, so then user needs to send it by importToken
-    if (importToken) { authToken = importToken }
-
-    let settings: FetchSettings = {
-      method: method || "GET",
-      headers: {
-        'Authorization': `Bearer ${authToken}`
-      }
-    };
-
-    if (method === "POST" || method === "PUT") {
-      settings = {
-        ...settings,
-        headers: {
-          ...settings.headers,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentials)
-      }
-    }
-
-    try {
-      let chosenUrl = (modeOfUse === 'dev') ? devUrl : prodUrl;
-      const connection: Response = await fetch(chosenUrl, settings);
-
-      if (connection.status === 200) {
-        if (isUsersPasswordChange) {
-
-          setMessage('Salasanasi on vaihdettu!');
-          setApiData({
-            ...apiData,
-            fetchReady: true
-          });
-
-          setTimeout(() => {
-            setMessage('')
-          }, 3000);
-
-        } else {
-
-          setApiData({
-            ...apiData,
-            allCredentials: await connection.json(),
-            fetchReady: true
-          });
-
-          // if it was POST or PUT, confirm, that credentials are now saved
-          if (method === 'POST' || method === 'PUT') {
-
-            setMessage('Tunnukset tallennettu!');
-            setTimeout(() => {
-              setMessage('')
-            }, 3000);
-          }
-        }
-      } else {
-
-        let errorText: string = "";
-
-        switch (connection.status) {
-          case 401: 
-            errorText = "Ei lupaa tietoihin / toimenpiteeseen."; 
-            logUserOut();
-            break;
-          case 400: errorText = "Virhe pyynnön tiedoissa"; break;
-          default: errorText = "Palvelimella tapahtui odottamaton virhe"; break;
-        }
-
-        setApiData({
-          ...apiData,
-          error: errorText,
-          fetchReady: true
-        });
-        setTimeout(() => {
-          setApiData({
-            ...apiData,
-            error: ''
-          });
-        }, 3000);
-      }
-
-    } catch (e: any) {
-      setApiData({
-        ...apiData,
-        error: "Palvelimeen ei saada yhteyttä",
-        fetchReady: true
-      });
-    }
+  const saveShoppingList = (): void => {
+    localStorage.setItem("shoppingList", JSON.stringify(selectedToList));
   }
 
-  const logUserOut = () => {
-    setUsername('');
-    setToken('');
-    localStorage.setItem("uDetails", '');
-    setApiData({
-      ...apiData,
-      allCredentials: [],
-      fetchReady: true
-    });
+  const emptyList = (): void => {
+    localStorage.setItem("shoppingList", JSON.stringify([]));
+    setSelectedToList([]);
+  }
+
+  const loadShoppingList = (): void => {
+    let storedList = localStorage.getItem("shoppingList");
+
+    if (storedList !== null) {
+      setSelectedToList(JSON.parse(storedList));
+    } else {
+      setSelectedToList([]);
+    }
   }
 
   useEffect(() => {
     // logs in, if user did not logged out
-    const loggedUserJSON = window.localStorage.getItem('uDetails');
+    //const loggedUserJSON = window.localStorage.getItem('uDetails');
 
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      setToken(user.token);
-      setUsername(user.username);
-      // fetches users saved credentials
-      apiCall(undefined, undefined, user.token);
-    }
+    //if (loggedUserJSON) {
+    //const user = JSON.parse(loggedUserJSON);
+    //setToken(user.token);
+    // fetches users saved credentials
+    //}
   }, []);
 
-  useEffect(() => {
-    if (username) {
-      apiCall();
-    }
-  }, [username]);
 
   return (
     <IzFoodsContext.Provider value={{
-      token, setToken,
-      username, setUsername,
-      loginDialogOpen, setLoginDialogOpen,
-      registerDialogOpen, setRegisterDialogOpen,
       message, setMessage,
-      apiData, setApiData,
-      apiCall,
-      modeOfUse,
-      logUserOut,
       isMobile,
       selectedToList,
-      setSelectedToList
+      setSelectedToList,
+      showFoods, setShowFoods,
+      showIngredients, setShowIngredients,
+      showList, setShowList,
+      saveShoppingList,
+      loadShoppingList,
+      emptyList
     }}>
       {props.children}
     </IzFoodsContext.Provider>

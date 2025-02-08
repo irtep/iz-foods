@@ -1,8 +1,9 @@
 import { Container } from "@mui/material"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
-import ThreeColumnLayout from "./components/ThreeColumnLayout"
 import { IzFoodsProvider } from './context/izFoodsContext'
+import Main from "./components/Main"
+
 
 function App() {
 
@@ -11,7 +12,7 @@ function App() {
       <Container>
         <IzFoodsProvider>
           <Header />
-          <ThreeColumnLayout />
+          <Main />
           <Footer />
         </IzFoodsProvider>
       </Container>
