@@ -18,26 +18,37 @@ const ShoppingBasket: React.FC = (): React.ReactElement => {
                     return (
                         <Container
                             sx={{
-                                margin: 1
+                                margin: 1,
+                                border: 'solid 1px black'
                             }}
                             key={`atBasket:${elem.name}${i}`}
                         >
                             {elem.name} {elem.quantity} {elem.type}
                             <IconButton
-                                onClick={
-                                    () => {
-                                        setSelectedToList((prevSelectedToList: IngredientAtBasket[]) =>
-                                            prevSelectedToList.filter((item) => item.name !== elem.name)
-                                        );
-                                    }
-                                } color="error">
+                                onClick={() => {
+                                    setSelectedToList((prevSelectedToList: IngredientAtBasket[]) =>
+                                        prevSelectedToList.filter((item) => item.name !== elem.name)
+                                    );
+                                }}
+                                color="error"
+                            >
                                 <DeleteIcon />
                             </IconButton>
-                            <Checkbox></Checkbox>
+                            <Checkbox
+                                checked={elem.ticked}  // Bind checked value to state
+                                onChange={() => {
+                                    setSelectedToList((prevSelectedToList: IngredientAtBasket[]) =>
+                                        prevSelectedToList.map((item) =>
+                                            item.name === elem.name ? { ...item, ticked: !item.ticked } : item
+                                        )
+                                    );
+                                }}
+                            />
                         </Container>
-                    )
+                    );
                 })
             }
+
         </Container>
     );
 }

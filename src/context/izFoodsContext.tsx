@@ -13,7 +13,6 @@ interface Props {
 
 export const IzFoodsProvider: React.FC<Props> = (props: Props): React.ReactElement => {
   const [message, setMessage] = useState<string>('');
-  //const [selectedToList, setSelectedToList] = useState<Ingredient[] | NonFood[]>([]);
   const [selectedToList, setSelectedToList] = useState<IngredientAtBasket[]>([]);
   const [showFoods, setShowFoods] = useState<boolean>(true);
   const [showIngredients, setShowIngredients] = useState<boolean>(true);

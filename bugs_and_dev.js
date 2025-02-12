@@ -3,6 +3,9 @@ bugs:
 
 dev:
 - vapaakenttä
+- selkeempi klikkaus kännykälle
+- borderit lista itemeihin
+- check boxi mukaan itemeihin, kun nyt ei tallennu
 - ruokien muistiinpanot näkyviin
 
 ruokia lisättäväksi:
@@ -11,7 +14,7 @@ ruokia lisättäväksi:
 - normaali huancaina
 - ehkä munakas
 ]},
-{id: 1, nombre: 'Sopa_de_verduras', madeOf: [
+{id: 1, nombre: 'Sopa_de_verduras', m   adeOf: [
 'pollo', 'fideos', 'zanahorias', 'apio', 'ginger', 'papas'
 ]},
 {id: 2, nombre: 'Papa_rellena', madeOf: [

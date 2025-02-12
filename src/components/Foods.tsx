@@ -44,6 +44,7 @@ const Foods: React.FC = (): React.ReactElement => {
                                                     name: ingredientDetails.name,
                                                     quantity: ing.quantity,
                                                     type: ingredientDetails.type,
+                                                    ticked: false
                                                 });
                                             }
                                         }

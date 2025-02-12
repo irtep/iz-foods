@@ -33,7 +33,8 @@ const Ingredients: React.FC = (): React.ReactElement => {
                                         {
                                             name: ing.name,
                                             quantity: ing.defaultQuantity,
-                                            type: ing.type
+                                            type: ing.type,
+                                            ticked: false
                                         },
                                     ]);
                                 } else {

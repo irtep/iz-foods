@@ -4,6 +4,7 @@ import Foods from './Foods';
 import Ingredients from './Ingredients';
 import ShoppingBasket from './ShoppingBasket';
 import { IzFoodsContext } from '../context/izFoodsContext';
+import FreeField from './FreeField';
 
 const OneColumnLayout: React.FC = () => {
     const {
@@ -27,7 +28,8 @@ const OneColumnLayout: React.FC = () => {
                 (showIngredients)
                     ?
                     <Paper elevation={3} sx={{ padding: 2, margin: 1 }}>
-                        <Typography variant="h6">Ainekset</Typography>
+                        <Typography variant="h6">Ainekset/Hyödykkeet</Typography>
+                        <FreeField/>
                         <Ingredients />
                     </Paper>
                     : <></>

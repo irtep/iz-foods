@@ -3,6 +3,7 @@ import { Grid, Paper, Typography } from '@mui/material';
 import Foods from './Foods';
 import Ingredients from './Ingredients';
 import ShoppingBasket from './ShoppingBasket';
+import FreeField from './FreeField';
 
 const ThreeColumnLayout: React.FC = () => {
   return (
@@ -15,7 +16,8 @@ const ThreeColumnLayout: React.FC = () => {
       </Grid>
       <Grid item xs={12} md={4}>
         <Paper elevation={3} sx={{ padding: 2 }}>
-          <Typography variant="h6">Ainekset</Typography>
+          <Typography variant="h6">Ainekset/Hyödykkeet</Typography>
+          <FreeField/>
           <Ingredients/>
         </Paper>
       </Grid>
