@@ -1,4 +1,4 @@
-import { Container, Typography } from '@mui/material';
+import { Button, Container, Typography } from '@mui/material';
 import React, { useContext } from 'react';
 import { Ingredient, ingredients } from '../data/plates';
 import { NonFood, nonFoods } from '../data/non-foods';
@@ -16,9 +16,10 @@ const Ingredients: React.FC = (): React.ReactElement => {
             {
                 ingredients.map((ing: Ingredient, i: number) => {
                     return (
-                        <Container
+                        <>
+                        <Button
                             sx={{
-                                margin: 1
+                                color: 'black'
                             }}
                             key={`${ing.name} ${i}`}
                             onClick={() => {
@@ -50,7 +51,9 @@ const Ingredients: React.FC = (): React.ReactElement => {
                             }}
                         >
                             {ing.name}
-                        </Container>
+                        </Button>
+                        <br/>
+                        </>
                     )
                 })
             }
@@ -60,9 +63,10 @@ const Ingredients: React.FC = (): React.ReactElement => {
             {
                 nonFoods.map((nF: NonFood, i: number) => {
                     return (
-                        <Container
+                        <>
+                        <Button
                             sx={{
-                                margin: 1
+                                color: 'black'
                             }}
                             key={`${nF.name} ${i}`}
                             onClick={() => {
@@ -93,7 +97,9 @@ const Ingredients: React.FC = (): React.ReactElement => {
                             }}
                         >
                             {nF.name}
-                        </Container>
+                        </Button>
+                        <br/>
+                        </>
                     )
                 })
             }

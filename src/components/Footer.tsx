@@ -5,16 +5,14 @@ const Footer: React.FC = (): React.ReactElement => {
 
     return (
         <Container sx={{
-            position: 'fixed',
-            bottom: 0,
             color: "rgb(0,0,80)",
-            borderRadius: 2,
+            background: "rgb(55, 137, 196)",
             margin: 1,
             padding: 1
         }}>
             <Typography>
-                Version: 1.0.0
-            </Typography>
+                Version: 1.0.7
+            </Typography>   
         </Container>
     );
 }

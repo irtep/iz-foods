@@ -18,7 +18,11 @@ const OneColumnLayout: React.FC = () => {
             {
                 (showFoods)
                     ?
-                    <Paper elevation={3} sx={{ padding: 2, margin: 1 }}>
+                    <Paper elevation={3} sx={{ 
+                        padding: 2,
+                        margin: 1,
+                        background: 'rgb(236, 245, 180)'
+                    }}>
                         <Typography variant="h6">Ruuat</Typography>
                         <Foods />
                     </Paper>
@@ -27,7 +31,11 @@ const OneColumnLayout: React.FC = () => {
             {
                 (showIngredients)
                     ?
-                    <Paper elevation={3} sx={{ padding: 2, margin: 1 }}>
+                    <Paper elevation={3} sx={{ 
+                        padding: 2,
+                        margin: 1,
+                        background: 'rgb(236, 245, 180)'
+                    }}>
                         <Typography variant="h6">Ainekset/Hyödykkeet</Typography>
                         <FreeField/>
                         <Ingredients />
@@ -37,7 +45,11 @@ const OneColumnLayout: React.FC = () => {
             {
                 (showList)
                     ?
-                    <Paper elevation={3} sx={{ padding: 2, margin: 1 }}>
+                    <Paper elevation={3} sx={{ 
+                        padding: 2,
+                        margin: 1,
+                        background: 'rgb(236, 245, 180)'
+                    }}>
                         <Typography variant="h6">Ostoslista</Typography>
                         <ShoppingBasket />
                     </Paper>

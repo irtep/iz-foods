@@ -19,7 +19,7 @@ const ShoppingBasket: React.FC = (): React.ReactElement => {
                         <Container
                             sx={{
                                 margin: 1,
-                                border: 'solid 1px black'
+                                border: 'solid 1px white'
                             }}
                             key={`atBasket:${elem.name}${i}`}
                         >
