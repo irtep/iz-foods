@@ -49,7 +49,7 @@ ruokia lisättäväksi:
 'pimiento rojo', 'arroz', 'perejil', 'alverjitas', 'aji amarillo', 'papa', 'pollo', 'cebolla', 'zanahoria'
 ]},
 {id: 20, nombre: 'Aji_de_gallina', madeOf: [
-'pechos de pollo', 'papas', 'aji amarillo', 'apio', 'arroz', 'huevos', 'aceituna', 'lechuga', 'cebolla', 'ajo', 'pan de mol', 'leche (opcional)'
+'pechos de pollo', 'papas', 'aji amarillo', 'apio', 'arroz', 'huevos', 'aceituna', 'lechuga', 'cebolla', 'ajo', 'pan de mol', 'leche (opcional), crackers'
 ]},
 {id: 21, nombre: 'Milanesa', madeOf: [
 'pan rayado', 'filetes pollo', 'huevo', 'arroz', 'harina', 'ensalada'
