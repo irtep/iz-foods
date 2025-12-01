@@ -145,5 +145,25 @@ export const menus: Plate[] = [
             { id: 26, quantity: 1 }, // parsakaalia
             { id: 0, quantity: 3 } // kananmunia
         ]
-    }
+    },
+    {
+        id: 10, name: 'Pollo asado',
+        ingredients: [
+            { id: 0, quantity: 3 }, // muslos de pollo, 9 piezas
+            { id: 1, quantity: 400 }, // arroz
+            { id: 2, quantity: 1.75 }, // kikkoman
+            { id: 3, quantity: 400 } // mostasa
+        // vinagre
+        // ajo fresco
+        // inkivääri kion
+        // muskottipähkinä
+        // papas
+        // vinagre etikka
+        //aceite de oliva
+        // leche
+        ],
+        notes: `
+        se macera de una noche anterior. horno 180 grados, 45 minutes, pero mas presas es una hora y veinte aprox.
+        `
+    },
 ];
